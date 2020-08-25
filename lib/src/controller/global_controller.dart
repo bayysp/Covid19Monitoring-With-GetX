@@ -17,25 +17,12 @@ class GlobalController extends GetxController {
   @override
   void onInit() {
     print("GlobalController - onInit");
-
-//    dataMap["Confirmed"] = confirmedTotal.value;
-//    dataMap["Recovered"] = recoveredTotal.value;
-//    dataMap["Deaths"] = deathTotal.value;
-
     _fetchGlobalData();
     super.onInit();
   }
 
   void _fetchGlobalData() async {
     try {
-      //show loading
-      Future.delayed(
-        Duration.zero,
-        () => Container(
-            height: Get.height,
-            width: Get.width,
-            child: Center(child: CircularProgressIndicator())),
-      );
 
       var data = await CovidDataSource.instance.loadGlobalData();
       globalEntity.value = GlobalEntity().fromJson(data);
@@ -45,11 +32,6 @@ class GlobalController extends GetxController {
       recoveredTotal.value = globalEntity.value.recovered.value.toDouble();
       deathTotal.value = globalEntity.value.deaths.value.toDouble();
 
-//      dataMap.putIfAbsent("Confirmed", () => confirmedTotal.value);
-//      dataMap.putIfAbsent("Recovered", () => recoveredTotal.value);
-//      dataMap.putIfAbsent("Deaths", () => deathTotal.value);
-
-      Get.back();
     } catch (_) {
       debugPrint("GlobalController - onCatch error ");
     }
