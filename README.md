@@ -1,4 +1,4 @@
-# getxexample
+# GetX Example
 
 A new Flutter application.
 
