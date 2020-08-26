@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildLastUpdateItem() {
     return Container(
       child: Obx(
-        () => Text("Last Update at ${_globalController.lastUpdate.value}"),
+        () => Text("Last Update at : ${_globalController.lastUpdate.value}"),
       ),
     );
   }

@@ -19,8 +19,6 @@ class GlobalCaseWidget extends StatelessWidget {
     );
   }
 
-
-
   Widget _buildStatisticData() {
     return Container(
       child: Column(
@@ -42,9 +40,11 @@ class GlobalCaseWidget extends StatelessWidget {
     return Container(
       child: Obx(
         () => PieChart(
-          chartType: ChartType.disc,
+          chartType: ChartType.ring,
           showLegends: false,
           dataMap: showChartData(),
+          colorList: [Colors.white, Colors.greenAccent, Colors.redAccent],
+          chartValueStyle: TextStyle(color: Colors.white),
         ),
       ),
     );
@@ -62,6 +62,7 @@ class GlobalCaseWidget extends StatelessWidget {
           () => Text(
             _globalController.confirmedTotal.value.toString(),
             style: TextStyle(
+              color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -83,6 +84,7 @@ class GlobalCaseWidget extends StatelessWidget {
           () => Text(
             _globalController.recoveredTotal.value.toString(),
             style: TextStyle(
+              color: Colors.greenAccent,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -104,6 +106,7 @@ class GlobalCaseWidget extends StatelessWidget {
           () => Text(
             _globalController.deathTotal.value.toString(),
             style: TextStyle(
+              color: Colors.redAccent,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           name: '/detail',
           page: () => DetailCountryScreen(),
         )
-      ],
+      ],theme: ThemeData.dark(),
     );
   }
 }

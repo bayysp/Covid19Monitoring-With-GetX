@@ -10,4 +10,8 @@ class CovidDataSource{
   Future<Map<String,dynamic>> loadCountries(){
     return BaseNetwork.get("countries");
   }
+
+  Future<Map<String,dynamic>> loadSelectedCountry(iso3){
+    return BaseNetwork.get("countries/$iso3");
+  }
 }
