@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxexample/src/controller/global_controller.dart';
 import 'package:getxexample/src/view/home/global_case_widget.dart';
+import 'package:getxexample/src/view/home/home_detail_country_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalController _globalController = Get.put(GlobalController());
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             _buildLastUpdateItem(),
             _buildGlobalDataInfo(),
+            _buildCountryWidget(),
           ],
         ),
       ),
@@ -27,13 +29,35 @@ class HomeScreen extends StatelessWidget {
   Widget _buildLastUpdateItem() {
     return Container(
       child: Obx(
-        () => Text(
-            "Last Update at ${_globalController.lastUpdate.value}"),
+        () => Text("Last Update at ${_globalController.lastUpdate.value}"),
       ),
     );
   }
 
   Widget _buildGlobalDataInfo() {
     return GlobalCaseWidget();
+  }
+
+  Widget _buildCountryWidget() {
+    return Container(
+      margin: EdgeInsets.only(
+        left: 16,
+        right: 16,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.blue.withOpacity(0.3),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.2),
+            blurRadius: 8.0,
+            spreadRadius: 0.8,
+          ),
+        ],
+      ),
+      height: Get.height * 0.3,
+      width: Get.width * 1,
+      child: HomeDetailCountryWidget(),
+    );
   }
 }

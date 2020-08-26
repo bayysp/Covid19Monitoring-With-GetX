@@ -13,7 +13,7 @@ class BaseNetwork {
 
     final response = await http.get(fullUrl);
 
-    debugPrint("BaseNetwork - response : $response");
+    debugPrint("BaseNetwork - response : ${response.body}");
 
     return _processResponse(response);
   }

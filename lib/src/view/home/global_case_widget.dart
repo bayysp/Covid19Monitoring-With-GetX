@@ -4,7 +4,7 @@ import 'package:getxexample/src/controller/global_controller.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class GlobalCaseWidget extends StatelessWidget {
-  final GlobalController _globalController = Get.put(GlobalController());
+  final GlobalController _globalController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,8 @@ class GlobalCaseWidget extends StatelessWidget {
       ),
     );
   }
+
+
 
   Widget _buildStatisticData() {
     return Container(
@@ -56,13 +58,15 @@ class GlobalCaseWidget extends StatelessWidget {
           "Confirmed",
           style: TextStyle(fontSize: 18),
         ),
-        Obx(() => Text(
-              _globalController.confirmedTotal.value.toString(),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ))
+        Obx(
+          () => Text(
+            _globalController.confirmedTotal.value.toString(),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
       ],
     );
   }
