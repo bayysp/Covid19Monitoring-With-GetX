@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxexample/src/controller/global_controller.dart';
+import 'package:getxexample/src/view/commons/common_general_case_widget.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class DetailCountryScreen extends StatelessWidget {
@@ -16,38 +17,11 @@ class DetailCountryScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
-            _buildGeneralCase(),
+            _buildChart(),
+            Padding(padding: EdgeInsets.only(top: 16)),
+            CommonGeneralCaseWidget(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildGeneralCase() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Row(
-        children: <Widget>[
-          Expanded(child: _buildStatisticData()),
-          Expanded(child: _buildChart()),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatisticData() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: 8)),
-          _itemConfirmed(),
-          Padding(padding: EdgeInsets.only(top: 8)),
-          _itemRecovered(),
-          Padding(padding: EdgeInsets.only(top: 8)),
-          _itemDeaths(),
-          Padding(padding: EdgeInsets.only(top: 8)),
-        ],
       ),
     );
   }
@@ -57,78 +31,12 @@ class DetailCountryScreen extends StatelessWidget {
       child: Obx(
         () => PieChart(
           chartType: ChartType.ring,
-          showLegends: false,
+          showLegends: true,
           dataMap: showChartData(),
           colorList: [Colors.white, Colors.greenAccent, Colors.redAccent],
           chartValueStyle: TextStyle(color: Colors.white),
         ),
       ),
-    );
-  }
-
-  Widget _itemConfirmed() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Confirmed",
-          style: TextStyle(fontSize: 18),
-        ),
-        Obx(
-          () => Text(
-            _globalController.countryDetailConfirmed.value.toString(),
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _itemRecovered() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Recovered",
-          style: TextStyle(fontSize: 18),
-        ),
-        Obx(
-          () => Text(
-            _globalController.countryDetailRecovered.value.toString(),
-            style: TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _itemDeaths() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Deaths",
-          style: TextStyle(fontSize: 18),
-        ),
-        Obx(
-          () => Text(
-            _globalController.countryDetailDeaths.value.toString(),
-            style: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
-      ],
     );
   }
 

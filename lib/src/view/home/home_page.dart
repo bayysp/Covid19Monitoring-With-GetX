@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxexample/src/controller/global_controller.dart';
 import 'package:getxexample/src/view/home/global_case_widget.dart';
-import 'package:getxexample/src/view/home/home_detail_country_widget.dart';
+import 'package:getxexample/src/view/home/selected_country_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalController _globalController = Get.put(GlobalController());
@@ -18,8 +18,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             _buildLastUpdateItem(),
-            _buildGlobalDataInfo(),
-            _buildCountryWidget(),
+            GlobalCaseWidget(),
+            _buildSelectedCountryCaseWidget(),
           ],
         ),
       ),
@@ -34,11 +34,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGlobalDataInfo() {
-    return GlobalCaseWidget();
-  }
-
-  Widget _buildCountryWidget() {
+  Widget _buildSelectedCountryCaseWidget() {
     return Container(
       margin: EdgeInsets.only(
         left: 16,
@@ -57,7 +53,7 @@ class HomeScreen extends StatelessWidget {
       ),
       height: Get.height * 0.3,
       width: Get.width * 1,
-      child: HomeDetailCountryWidget(),
+      child: SelectedCountryWidget(),
     );
   }
 }
