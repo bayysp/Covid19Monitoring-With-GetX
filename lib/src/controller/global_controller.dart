@@ -8,7 +8,7 @@ import 'package:getxexample/src/network/covid_data_source.dart';
 import 'package:intl/intl.dart';
 
 class GlobalController extends GetxController {
-  var _globalEntity = GlobalEntity().obs;
+  var globalEntity = GlobalEntity().obs;
   var _countryEntity = CountryEntity().obs;
   var _detailCountryEntity = DetailCountryEntity().obs;
 
@@ -49,14 +49,14 @@ class GlobalController extends GetxController {
   void _fetchGlobalData() async {
     try {
       var data = await CovidDataSource.instance.loadGlobalData();
-      _globalEntity.value = GlobalEntity().fromJson(data);
+      globalEntity.value = GlobalEntity().fromJson(data);
 
       lastUpdate.value = DateFormat('yyyy-MM-dd HH:mm:ss')
-          .format(DateTime.parse(_globalEntity.value.lastUpdate));
+          .format(DateTime.parse(globalEntity.value.lastUpdate));
 
-      confirmedTotal.value = _globalEntity.value.confirmed.value.toDouble();
-      recoveredTotal.value = _globalEntity.value.recovered.value.toDouble();
-      deathTotal.value = _globalEntity.value.deaths.value.toDouble();
+      confirmedTotal.value = globalEntity.value.confirmed.value.toDouble();
+      recoveredTotal.value = globalEntity.value.recovered.value.toDouble();
+      deathTotal.value = globalEntity.value.deaths.value.toDouble();
     } catch (_) {
       debugPrint("GlobalController - onCatch error ");
     }

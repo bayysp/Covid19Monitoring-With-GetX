@@ -60,7 +60,7 @@ class GlobalCaseWidget extends StatelessWidget {
         ),
         Obx(
           () => Text(
-            _globalController.confirmedTotal.value.toString(),
+            _globalController.globalEntity.value.confirmed.value.toString(),
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
