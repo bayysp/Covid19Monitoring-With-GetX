@@ -6,6 +6,8 @@ here i try to create simple apps using mathdroid API, with implement GetX depend
 
 ![ScreenShot](https://github.com/bayysp/Covid19Monitoring-With-GetX/blob/master/screen_shot.png?raw=true)
 
+you can read my medium article about GetX here https://medium.com/@bayysp/what-is-getx-and-how-to-fetching-api-with-it-flutter-2fbcfd923de7
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
