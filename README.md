@@ -1,6 +1,12 @@
 # GetX Example
 
-A new Flutter application.
+GetX is super cool library, with GetX you can make your apps Reactive, handling your state management and write less code with high performance
+
+here i try to create simple apps using mathdroid API, with implement GetX dependency injection, Workers and observer
+
+![ScreenShot](https://github.com/bayysp/Covid19Monitoring-With-GetX/blob/master/screen_shot.png?raw=true)
+
+you can read my medium article about GetX here https://medium.com/@bayysp/what-is-getx-and-how-to-fetching-api-with-it-flutter-2fbcfd923de7
 
 ## Getting Started
 
