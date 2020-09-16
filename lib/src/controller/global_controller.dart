@@ -25,6 +25,9 @@ class GlobalController extends GetxController {
   var countryDetailRecovered = 0.obs;
   var countryDetailDeaths = 0.obs;
 
+  //for checking success or not
+  var isSelectedCountrySuccess = false.obs;
+
   final numberFormat = NumberFormat("#,###");
 
   @override
@@ -75,12 +78,22 @@ class GlobalController extends GetxController {
     try {
       var data = await CovidDataSource.instance
           .loadSelectedCountry(selectedCountries.value);
-      _detailCountryEntity.value = DetailCountryEntity().fromJson(data);
-
-      countryDetailConfirmed.value = _detailCountryEntity.value.confirmed.value;
-      countryDetailRecovered.value = _detailCountryEntity.value.recovered.value;
-      countryDetailDeaths.value = _detailCountryEntity.value.deaths.value;
-
+      print("data is $data");
+      if (data.containsKey("error")) {
+        print("GlobalController : contains key error true");
+        isSelectedCountrySuccess.value = false;
+        countryDetailConfirmed.value = 0;
+        countryDetailRecovered.value = 0;
+        countryDetailDeaths.value = 0;
+      } else {
+        isSelectedCountrySuccess.value = true;
+        _detailCountryEntity.value = DetailCountryEntity().fromJson(data);
+        countryDetailConfirmed.value =
+            _detailCountryEntity.value.confirmed.value;
+        countryDetailRecovered.value =
+            _detailCountryEntity.value.recovered.value;
+        countryDetailDeaths.value = _detailCountryEntity.value.deaths.value;
+      }
       print("_fetchCountrySelected value ${countryDetailConfirmed.value}");
     } catch (_) {
       debugPrint("GlobalController - onCatch error ");
