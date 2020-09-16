@@ -25,6 +25,7 @@ class BaseNetwork {
       final jsonBody = json.decode(body);
       return jsonBody;
     } else {
+      print("processResponse error");
       return {"error": true};
     }
   }

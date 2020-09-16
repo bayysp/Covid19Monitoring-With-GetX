@@ -38,7 +38,7 @@ class SelectedCountryWidget extends StatelessWidget {
           items: _globalController.countries.value
               .map(
                 (val) => DropdownMenuItem(
-                  value: val.iso3.toString(),
+                  value: val.iso3 == null ? "" : val.iso3.toString(),
                   child: Text(
                     val.name.toString(),
                     style: TextStyle(color: Colors.white),
@@ -47,8 +47,13 @@ class SelectedCountryWidget extends StatelessWidget {
               )
               .toList(),
           onChanged: (value) {
-            _globalController.selectedCountries.value = value;
-            print("New Value : ${_globalController.selectedCountries.value}");
+            print("cek value $value");
+            if (value == "") {
+              Get.snackbar("Error", "Data is empty");
+            } else {
+              _globalController.selectedCountries.value = value;
+              print("New Value : ${_globalController.selectedCountries.value}");
+            }
           },
         ),
       ),
@@ -73,9 +78,11 @@ class SelectedCountryWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         color: Colors.lightBlueAccent.withOpacity(0.5),
-        onPressed: () {
-          Get.toNamed('/detail');
-        },
+        onPressed: _globalController.isSelectedCountrySuccess.value
+            ? () {
+                Get.toNamed('/detail');
+              }
+            : () {},
       ),
     );
   }
