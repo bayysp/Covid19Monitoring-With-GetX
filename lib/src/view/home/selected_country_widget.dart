@@ -61,28 +61,30 @@ class SelectedCountryWidget extends StatelessWidget {
   }
 
   Widget _buildButtonDetail() {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.2),
-            blurRadius: 6.0,
-            spreadRadius: 0.8,
-          ),
-        ],
-      ),
-      child: RaisedButton(
-        child: Text("See Detail"),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.lightBlue),
-          borderRadius: BorderRadius.circular(8),
+    return Obx(
+      () => Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blue.withOpacity(0.2),
+              blurRadius: 6.0,
+              spreadRadius: 0.8,
+            ),
+          ],
         ),
-        color: Colors.lightBlueAccent.withOpacity(0.5),
-        onPressed: _globalController.isSelectedCountrySuccess.value
-            ? () {
-                Get.toNamed('/detail');
-              }
-            : () {},
+        child: RaisedButton(
+          child: Text("See Detail"),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.lightBlue),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          color: Colors.lightBlueAccent.withOpacity(0.5),
+          onPressed: _globalController.isSelectedCountrySuccess.value
+              ? () {
+                  Get.toNamed('/detail');
+                }
+              : null,
+        ),
       ),
     );
   }
