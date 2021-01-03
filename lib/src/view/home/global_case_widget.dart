@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:getxexample/src/controller/global_controller.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import '../../controller/global_controller.dart';
+
 class GlobalCaseWidget extends StatelessWidget {
-  final GlobalController _globalController = Get.find();
+  final GlobalController _globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {

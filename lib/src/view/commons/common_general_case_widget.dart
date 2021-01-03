@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxexample/src/controller/global_controller.dart';
 
+import '../../controller/global_controller.dart';
+
 class CommonGeneralCaseWidget extends StatelessWidget {
-  final GlobalController _globalController = Get.find();
+  final GlobalController _globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +37,10 @@ class CommonGeneralCaseWidget extends StatelessWidget {
           Text("Confirmed", style: TextStyle(fontSize: 18)),
           Padding(padding: EdgeInsets.only(top: 8)),
           Obx(
-            () => Text(
-              _globalController.countryDetailConfirmed.value.toString(),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+            () => _totalOfCase(
+                _globalController.countryDetailConfirmed.value.toString(),
+                Colors.white),
+          )
         ],
       ),
     );
@@ -57,15 +54,10 @@ class CommonGeneralCaseWidget extends StatelessWidget {
           Text("Recovered", style: TextStyle(fontSize: 18)),
           Padding(padding: EdgeInsets.only(top: 8)),
           Obx(
-            () => Text(
-              _globalController.countryDetailRecovered.value.toString(),
-              style: TextStyle(
-                color: Colors.greenAccent,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+            () => _totalOfCase(
+                _globalController.countryDetailRecovered.value.toString(),
+                Colors.greenAccent),
+          )
         ],
       ),
     );
@@ -78,17 +70,21 @@ class CommonGeneralCaseWidget extends StatelessWidget {
         children: <Widget>[
           Text("Deaths", style: TextStyle(fontSize: 18)),
           Padding(padding: EdgeInsets.only(top: 8)),
-          Obx(
-            () => Text(
+          Obx(() => _totalOfCase(
               _globalController.countryDetailDeaths.value.toString(),
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          )
+              Colors.redAccent))
         ],
+      ),
+    );
+  }
+
+  Widget _totalOfCase(String total, Color textColor) {
+    return Text(
+      total,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
       ),
     );
   }

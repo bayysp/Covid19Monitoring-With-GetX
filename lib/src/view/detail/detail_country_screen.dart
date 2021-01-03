@@ -5,7 +5,7 @@ import 'package:getxexample/src/view/commons/common_general_case_widget.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class DetailCountryScreen extends StatelessWidget {
-  final GlobalController _globalController = Get.find();
+  final GlobalController _globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {

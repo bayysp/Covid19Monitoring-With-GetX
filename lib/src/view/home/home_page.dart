@@ -4,8 +4,10 @@ import 'package:getxexample/src/controller/global_controller.dart';
 import 'package:getxexample/src/view/home/global_case_widget.dart';
 import 'package:getxexample/src/view/home/selected_country_widget.dart';
 
+import '../../controller/global_controller.dart';
+
 class HomeScreen extends StatelessWidget {
-  final GlobalController _globalController = Get.put(GlobalController());
+  final GlobalController _globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {

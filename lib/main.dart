@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getxexample/src/controller/bindings/controller_bindings.dart';
 import 'package:getxexample/src/view/detail/detail_country_screen.dart';
 import 'package:getxexample/src/view/home/home_page.dart';
 
@@ -16,12 +17,15 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => HomeScreen(),
+          binding: ControllerBindings(),
         ),
         GetPage(
           name: '/detail',
           page: () => DetailCountryScreen(),
+          binding: ControllerBindings(),
         )
-      ],theme: ThemeData.dark(),
+      ],
+      theme: ThemeData.dark(),
     );
   }
 }

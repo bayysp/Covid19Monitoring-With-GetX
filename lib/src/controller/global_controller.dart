@@ -7,7 +7,13 @@ import 'package:getxexample/src/model/global_entity.dart';
 import 'package:getxexample/src/network/covid_data_source.dart';
 import 'package:intl/intl.dart';
 
+import '../network/covid_data_source.dart';
+
 class GlobalController extends GetxController {
+  CovidDataSource covidDataSource;
+
+  GlobalController({this.covidDataSource});
+
   var globalEntity = GlobalEntity().obs;
   var _countryEntity = CountryEntity().obs;
   var _detailCountryEntity = DetailCountryEntity().obs;
@@ -51,7 +57,7 @@ class GlobalController extends GetxController {
 
   void _fetchGlobalData() async {
     try {
-      var data = await CovidDataSource.instance.loadGlobalData();
+      var data = await covidDataSource.loadGlobalData();
       globalEntity.value = GlobalEntity().fromJson(data);
 
       lastUpdate.value = DateFormat('yyyy-MM-dd HH:mm:ss')
@@ -67,7 +73,7 @@ class GlobalController extends GetxController {
 
   void _fetchCountries() async {
     try {
-      var data = await CovidDataSource.instance.loadCountries();
+      var data = await covidDataSource.loadCountries();
       _countryEntity.value = CountryEntity().fromJson(data);
 
       countries.value = _countryEntity.value.countries;
@@ -76,8 +82,8 @@ class GlobalController extends GetxController {
 
   void _fetchCountrySelected() async {
     try {
-      var data = await CovidDataSource.instance
-          .loadSelectedCountry(selectedCountries.value);
+      var data =
+          await covidDataSource.loadSelectedCountry(selectedCountries.value);
       print("data is $data");
       if (data.containsKey("error")) {
         print("GlobalController : contains key error true");
