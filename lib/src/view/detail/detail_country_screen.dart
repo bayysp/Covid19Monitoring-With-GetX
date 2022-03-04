@@ -31,10 +31,9 @@ class DetailCountryScreen extends StatelessWidget {
       child: Obx(
         () => PieChart(
           chartType: ChartType.ring,
-          showLegends: true,
           dataMap: showChartData(),
           colorList: [Colors.white, Colors.greenAccent, Colors.redAccent],
-          chartValueStyle: TextStyle(color: Colors.white),
+
         ),
       ),
     );

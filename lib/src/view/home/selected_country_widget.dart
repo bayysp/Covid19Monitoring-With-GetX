@@ -46,8 +46,7 @@ class SelectedCountryWidget extends StatelessWidget {
                 ),
               )
               .toList(),
-          onChanged: (value) {
-            print("cek value $value");
+          onChanged: (dynamic value) {
             if (value == "") {
               Get.snackbar("Error", "Data is empty");
             } else {
@@ -72,13 +71,18 @@ class SelectedCountryWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: RaisedButton(
+        child: ElevatedButton(
           child: Text("See Detail"),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.lightBlue),
-            borderRadius: BorderRadius.circular(8),
+          style: ElevatedButton.styleFrom(
+            onPrimary: Colors.lightBlueAccent,
+            primary: Colors.lightBlueAccent.withOpacity(0.5),
+            minimumSize: Size(88, 36),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.lightBlue),
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          color: Colors.lightBlueAccent.withOpacity(0.5),
           onPressed: _globalController.isSelectedCountrySuccess.value
               ? () {
                   Get.toNamed('/detail');

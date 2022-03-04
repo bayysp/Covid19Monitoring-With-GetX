@@ -15,7 +15,7 @@ class GlobalCaseWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(child: _buildStatisticData()),
-          Expanded(child: _buildChart()),
+          Expanded(child: _buildChart(context)),
         ],
       ),
     );
@@ -38,15 +38,29 @@ class GlobalCaseWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildChart() {
+  Widget _buildChart(BuildContext context) {
     return Container(
       child: Obx(
         () => PieChart(
           chartType: ChartType.ring,
-          showLegends: false,
           dataMap: showChartData(),
           colorList: [Colors.white, Colors.greenAccent, Colors.redAccent],
-          chartValueStyle: TextStyle(color: Colors.white),
+          legendOptions: LegendOptions(
+            showLegendsInRow: false,
+            legendPosition: LegendPosition.right,
+            showLegends: false,
+            legendShape: BoxShape.circle,
+            legendTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          chartValuesOptions: ChartValuesOptions(
+            showChartValueBackground: true,
+            showChartValues: true,
+            showChartValuesInPercentage: false,
+            showChartValuesOutside: false,
+            decimalPlaces: 1,
+          ),
         ),
       ),
     );

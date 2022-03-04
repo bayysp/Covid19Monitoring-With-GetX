@@ -10,13 +10,13 @@ import 'package:intl/intl.dart';
 import '../network/covid_data_source.dart';
 
 class GlobalController extends GetxController {
-  CovidDataSource covidDataSource;
+  CovidDataSource? covidDataSource;
 
   GlobalController({this.covidDataSource});
 
-  var globalEntity = GlobalEntity().obs;
-  var _countryEntity = CountryEntity().obs;
-  var _detailCountryEntity = DetailCountryEntity().obs;
+  Rx<GlobalEntity?> globalEntity = GlobalEntity().obs;
+  Rx<CountryEntity?> _countryEntity = CountryEntity().obs;
+  Rx<DetailCountryEntity?> _detailCountryEntity = DetailCountryEntity().obs;
 
   //for global
   var lastUpdate = "-".obs;
@@ -48,7 +48,7 @@ class GlobalController extends GetxController {
 
   @override
   void onReady() {
-    ever(selectedCountries, (_) {
+    ever(selectedCountries, (dynamic _) {
       print("onready called , ${selectedCountries.value}");
       _fetchCountrySelected();
     });
@@ -57,15 +57,16 @@ class GlobalController extends GetxController {
 
   void _fetchGlobalData() async {
     try {
-      var data = await covidDataSource.loadGlobalData();
-      globalEntity.value = GlobalEntity().fromJson(data);
+      Map<String, dynamic>? data = await covidDataSource?.loadGlobalData();
+      print("cek bay 1 ${data}");
+      globalEntity.value = GlobalEntity.fromJson(data ?? {});
 
       lastUpdate.value = DateFormat('yyyy-MM-dd HH:mm:ss')
-          .format(DateTime.parse(globalEntity.value.lastUpdate));
+          .format(DateTime.parse(globalEntity.value?.lastUpdate ?? ""));
 
-      confirmedTotal.value = globalEntity.value.confirmed.value.toDouble();
-      recoveredTotal.value = globalEntity.value.recovered.value.toDouble();
-      deathTotal.value = globalEntity.value.deaths.value.toDouble();
+      confirmedTotal.value = globalEntity.value?.confirmed?.value?.toDouble() ?? 0.0;
+      recoveredTotal.value = globalEntity.value?.recovered?.value?.toDouble() ?? 0.0;
+      deathTotal.value = globalEntity.value?.deaths?.value?.toDouble() ?? 0.0;
     } catch (_) {
       debugPrint("GlobalController - onCatch error ");
     }
@@ -73,17 +74,17 @@ class GlobalController extends GetxController {
 
   void _fetchCountries() async {
     try {
-      var data = await covidDataSource.loadCountries();
-      _countryEntity.value = CountryEntity().fromJson(data);
+      Map<String, dynamic>? data = await covidDataSource?.loadCountries();
+      _countryEntity.value = CountryEntity.fromJson(data ?? {});
 
-      countries.value = _countryEntity.value.countries;
+      countries.value = _countryEntity.value?.countries ?? [];
     } catch (_) {}
   }
 
   void _fetchCountrySelected() async {
     try {
-      var data =
-          await covidDataSource.loadSelectedCountry(selectedCountries.value);
+      Map<String, dynamic> data =
+          await (covidDataSource?.loadSelectedCountry(selectedCountries.value)) ?? {};
       print("data is $data");
       if (data.containsKey("error")) {
         print("GlobalController : contains key error true");
@@ -93,12 +94,13 @@ class GlobalController extends GetxController {
         countryDetailDeaths.value = 0;
       } else {
         isSelectedCountrySuccess.value = true;
-        _detailCountryEntity.value = DetailCountryEntity().fromJson(data);
+        _detailCountryEntity.value = DetailCountryEntity.fromJson(data);
         countryDetailConfirmed.value =
-            _detailCountryEntity.value.confirmed.value;
+            _detailCountryEntity.value?.confirmed?.value ?? 0;
         countryDetailRecovered.value =
-            _detailCountryEntity.value.recovered.value;
-        countryDetailDeaths.value = _detailCountryEntity.value.deaths.value;
+            _detailCountryEntity.value?.recovered?.value ?? 0;
+        countryDetailDeaths.value =
+            _detailCountryEntity.value?.deaths?.value ?? 0;
       }
       print("_fetchCountrySelected value ${countryDetailConfirmed.value}");
     } catch (_) {
