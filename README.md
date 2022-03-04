@@ -1,5 +1,9 @@
 # GetX Example
 
+# NOTES MARCH 04 2022
+Breaking changes, by this day i migrating this repository to null safety using Flutter 2.8.1 :rocket:
+if you still want to see previous version (No Null Safety) , i setup branch `no null safety` 😁
+
 GetX is super cool library, with GetX you can make your apps Reactive, handling your state management and write less code with high performance
 
 here i try to create simple apps using mathdroid API, with implement GetX dependency injection, Workers and observer
